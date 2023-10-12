@@ -11,9 +11,9 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
-use std::collections::HashMap;
+
+use std::{collections::{HashMap, hash_map}, hash};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum Progress {
@@ -35,7 +35,9 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    let a:HashMap<_,_> = map.iter().filter(|x|x.1==&value).collect();
+    a.len()
+
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +56,10 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    let mut a=0;
+    let c:Vec<_>= collection.iter().map(|x|{let b:HashMap<_,_> = x.iter().filter(|x|x.1==&value).collect();a+=b.len();
+        x}).collect();
+    a
 }
 
 #[cfg(test)]
